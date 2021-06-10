@@ -16,7 +16,7 @@ namespace CTSCore.EF
         public DbSet<TransportType> TransportTypes { get; set; }
         public DbSet<TransportTypeStop> TransportTypeStops { get; set; }
         public DbSet<Trip> Trips { get; set; }
-        public DbSet<TripTransport> TripTranports { get; set; }
+        public DbSet<TripTransport> TripTransports { get; set; }
         public DbSet<TripValidation> TripValidations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
