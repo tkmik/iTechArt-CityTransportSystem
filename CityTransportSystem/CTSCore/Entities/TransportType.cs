@@ -10,6 +10,6 @@ namespace CTSCore.Entities
         public string TransportTypeName { get; set; }
 
         public ICollection<Transport> Transports { get; set; }
-        public ICollection<TransportTypeStop> TransportTypesStops { get; set; }
+        public ICollection<TransportTypeStop> TransportTypeStops { get; set; }
     }
 }

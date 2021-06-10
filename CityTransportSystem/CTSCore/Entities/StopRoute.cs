@@ -14,6 +14,6 @@ namespace CTSCore.Entities
         public int RouteId { get; set; }
         public Route Route { get; set; }
 
-        public ICollection<StopRouteTrip> StopsRoutesTrips { get; set; }
+        public ICollection<StopRouteTrip> StopRouteTrips { get; set; }
     }
 }

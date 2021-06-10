@@ -16,7 +16,7 @@ namespace CTSCore.EF
         public DbSet<TransportType> TransportTypes { get; set; }
         public DbSet<TransportTypeStop> TransportTypeStops { get; set; }
         public DbSet<Trip> Trips { get; set; }
-        public DbSet<TripTranport> TripTranports { get; set; }
+        public DbSet<TripTransport> TripTranports { get; set; }
         public DbSet<TripValidation> TripValidations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,10 +38,10 @@ namespace CTSCore.EF
                     {
                         route.HasKey(r => r.Id);
                         route.Property(r => r.RouteName)
-                             .HasMaxLength(25)
+                             .HasMaxLength(100)
                              .IsRequired();
                         route.Property(r => r.Season)
-                             .HasMaxLength(15)
+                             .HasMaxLength(100)
                              .IsRequired();
                     }
                 );
@@ -52,13 +52,13 @@ namespace CTSCore.EF
                     {
                         stop.HasKey(s => s.Id);
                         stop.Property(s => s.Name)
-                            .HasMaxLength(25)
+                            .HasMaxLength(100)
                             .IsRequired();
                         stop.Property(s => s.Coordinate)
-                            .HasMaxLength(50)
+                            .HasMaxLength(100)
                             .IsRequired();
                         stop.Property(s => s.Address)
-                            .HasMaxLength(25)
+                            .HasMaxLength(100)
                             .IsRequired();
                     }
                 );
@@ -70,6 +70,8 @@ namespace CTSCore.EF
                     {
                         ticket.HasKey(t => t.Id);
                         ticket.HasAlternateKey(t => t.SerialNumber);
+                        ticket.Property(t => t.SerialNumber)
+                              .IsRequired();
                         ticket.Property(t => t.Cost)
                               .IsRequired();
                     }
@@ -81,14 +83,20 @@ namespace CTSCore.EF
                     transport => 
                     {
                         transport.HasKey(t => t.Id);
-                        transport.HasAlternateKey(t => t.VIN);
+                        transport.HasAlternateKey(t => t.Vin);
+                        transport.Property(t => t.Vin)
+                                 .HasMaxLength(17)
+                                 .IsRequired();
                         transport.HasAlternateKey(t => t.PlateNumber);
+                        transport.Property(t => t.PlateNumber)
+                                 .HasMaxLength(8)
+                                 .IsRequired();
                         transport.Property(t => t.ProductionYear)
                                  .IsRequired();
                         transport.Property(t => t.InspectionYear)
                                  .IsRequired();
                         transport.Property(t => t.FuelType)
-                                 .HasMaxLength(15)
+                                 .HasMaxLength(100)
                                  .IsRequired();
                         transport.Property(t => t.FuelConsumptionPer100km)
                                  .IsRequired();
@@ -100,11 +108,11 @@ namespace CTSCore.EF
             //Entity TransportType
             modelBuilder.Entity<TransportType>
                 (
-                    transporttype => 
+                    transportType => 
                     {
-                        transporttype.HasKey(tt => tt.Id);
-                        transporttype.Property(tt => tt.TransportTypeName)
-                                     .HasMaxLength(25)
+                        transportType.HasKey(tt => tt.Id);
+                        transportType.Property(tt => tt.TransportTypeName)
+                                     .HasMaxLength(100)
                                      .IsRequired();
                     }
                 );
@@ -115,7 +123,7 @@ namespace CTSCore.EF
                     trip => {
                         trip.HasKey(t => t.Id);
                         trip.Property(t => t.TripName)
-                            .HasMaxLength(25)
+                            .HasMaxLength(100)
                             .IsRequired();
                     }
                 );
@@ -123,10 +131,10 @@ namespace CTSCore.EF
             //Entity TripValidation
             modelBuilder.Entity<TripValidation>
                 (
-                    tripvalidation => 
+                    tripValidation => 
                     {
-                        tripvalidation.HasKey(tv => tv.Id);
-                        tripvalidation.Property(tv => tv.ValidationTime)
+                        tripValidation.HasKey(tv => tv.Id);
+                        tripValidation.Property(tv => tv.ValidationTime)
                                       .IsRequired();
                     }
                 );
@@ -134,35 +142,35 @@ namespace CTSCore.EF
             //many-to-many StopRoute
             modelBuilder.Entity<StopRoute>
                 (
-                    stoproute => 
+                    stopRoute => 
                     {
-                        stoproute.HasKey(sr => sr.Id);
-                        stoproute.HasAlternateKey(sr => new { sr.StopId, sr.RouteId });
-                        stoproute.HasOne<Route>(sr => sr.Route)
+                        stopRoute.HasKey(sr => sr.Id);
+                        stopRoute.HasAlternateKey(sr => new { sr.StopId, sr.RouteId });
+                        stopRoute.HasOne<Stop>(sr => sr.Stop)
+                                .WithMany(s => s.StopRoutes)
+                                .HasForeignKey(sr => sr.StopId)
+                                .IsRequired();
+                        stopRoute.HasOne<Route>(sr => sr.Route)
                                  .WithMany(r => r.StopRoutes)
                                  .HasForeignKey(sr => sr.RouteId)
-                                 .IsRequired();
-                        stoproute.HasOne<Stop>(sr => sr.Stop)
-                                 .WithMany(s => s.StopsRoutes)
-                                 .HasForeignKey(sr => sr.StopId)
-                                 .IsRequired();
+                                 .IsRequired();                       
                     }
                 );
 
             //many-to-many StopRouteTrip
             modelBuilder.Entity<StopRouteTrip>
                 (
-                    stoproutetrip => 
+                    stopRouteTrip => 
                     {
-                        stoproutetrip.HasKey(srt => srt.Id);
-                        stoproutetrip.HasAlternateKey(srt => new { srt.StopsRouteId, srt.TripId });
-                        stoproutetrip.HasOne<StopRoute>(srt => srt.StopsRoutes)
-                                     .WithMany(sr => sr.StopsRoutesTrips)
-                                     .HasForeignKey(srt => srt.StopsRouteId)
+                        stopRouteTrip.HasKey(srt => srt.Id);
+                        stopRouteTrip.HasAlternateKey(srt => new { srt.StopRouteId, srt.TripId });
+                        stopRouteTrip.HasOne<StopRoute>(srt => srt.StopRoutes)
+                                     .WithMany(sr => sr.StopRouteTrips)
+                                     .HasForeignKey(srt => srt.StopRouteId)
                                      .IsRequired();
-                        stoproutetrip.HasOne<Trip>(srt => srt.Trip)
-                                     .WithMany(t => t.StopsRoutesTrips)
-                                     .HasForeignKey(srt => srt.StopsRouteId)
+                        stopRouteTrip.HasOne<Trip>(srt => srt.Trip)
+                                     .WithMany(t => t.StopRouteTrips)
+                                     .HasForeignKey(srt => srt.StopRouteId)
                                      .IsRequired();
                     }
                 );
@@ -170,34 +178,34 @@ namespace CTSCore.EF
             //many-to-manty TransportTypeStop
             modelBuilder.Entity<TransportTypeStop>
                 (
-                    transporttypestop => 
+                    transportTypeStop => 
                     {
-                        transporttypestop.HasKey(tts => tts.Id);
-                        transporttypestop.HasAlternateKey(tts => new { tts.TransportTypeId, tts.StopId });
-                        transporttypestop.HasOne<TransportType>(tts => tts.TransportType)
-                                         .WithMany(tt => tt.TransportTypesStops)
+                        transportTypeStop.HasKey(tts => tts.Id);
+                        transportTypeStop.HasAlternateKey(tts => new { tts.TransportTypeId, tts.StopId });
+                        transportTypeStop.HasOne<TransportType>(tts => tts.TransportType)
+                                         .WithMany(tt => tt.TransportTypeStops)
                                          .HasForeignKey(tts => tts.TransportTypeId)
                                          .IsRequired();
-                        transporttypestop.HasOne<Stop>(tts => tts.Stop)
-                                         .WithMany(s => s.TransportTypesStops)
+                        transportTypeStop.HasOne<Stop>(tts => tts.Stop)
+                                         .WithMany(s => s.TransportTypeStops)
                                          .HasForeignKey(tts => tts.TransportTypeId)
                                          .IsRequired();
                     }
                 );
 
             //many-to-many TripTransport
-            modelBuilder.Entity<TripTranport>
+            modelBuilder.Entity<TripTransport>
                 (
-                    triptrancport => 
+                    tripTransport => 
                     {
-                        triptrancport.HasKey(tt => tt.Id);
-                        triptrancport.HasAlternateKey(tt => new { tt.TripId, tt.TransportId });
-                        triptrancport.HasOne<Trip>(tt => tt.Trip)
-                                     .WithMany(t => t.TripsTranports)
+                        tripTransport.HasKey(tt => tt.Id);
+                        tripTransport.HasAlternateKey(tt => new { tt.TripId, tt.TransportId });
+                        tripTransport.HasOne<Trip>(tt => tt.Trip)
+                                     .WithMany(t => t.TripTransports)
                                      .HasForeignKey(tt => tt.TripId)
                                      .IsRequired();
-                        triptrancport.HasOne<Transport>(tt => tt.Transport)
-                                     .WithMany(t => t.TripTranports)
+                        tripTransport.HasOne<Transport>(tt => tt.Transport)
+                                     .WithMany(t => t.TripTransports)
                                      .HasForeignKey(tt => tt.TransportId)
                                      .IsRequired();
                     }

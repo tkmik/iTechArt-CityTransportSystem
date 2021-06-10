@@ -12,8 +12,8 @@ namespace CTSCore.Entities
         public int TripId { get; set; }
         public Trip Trip { get; set; }
 
-        public int StopsRouteId { get; set; }
-        public StopRoute StopsRoutes { get; set; }
+        public int StopRouteId { get; set; }
+        public StopRoute StopRoutes { get; set; }
         
 
     }

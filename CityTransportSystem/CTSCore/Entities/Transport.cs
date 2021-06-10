@@ -7,7 +7,7 @@ namespace CTSCore.Entities
     class Transport
     {
         public int Id { get; set; }
-        public string VIN { get; set; }
+        public string Vin { get; set; }
         public string PlateNumber { get; set; }
         public DateTime ProductionYear { get; set; }
         public DateTime InspectionYear { get; set; }
@@ -18,7 +18,7 @@ namespace CTSCore.Entities
         public int TransportTypeId { get; set; }
         public TransportType TransportType { get; set; }
 
-        public ICollection<TripTranport> TripTranports { get; set; }
+        public ICollection<TripTransport> TripTransports { get; set; }
         public ICollection<TripValidation> TripValidations { get; set; }
     }
 }
