@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CTSCore.Entities
 {
-    class StopRoute
+    public class StopRoute
     {
         public int Id { get; set; }
 

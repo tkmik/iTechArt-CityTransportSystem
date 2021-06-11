@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CTSCore.Entities
 {
-    class TripValidation
+    public class TripValidation
     {
         public int Id { get; set; }
         public DateTime ValidationTime { get; set; }

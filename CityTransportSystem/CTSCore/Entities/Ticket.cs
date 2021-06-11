@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CTSCore.Entities
 {
-    class Ticket
+    public class Ticket
     {
         public int Id { get; set; }
         public int SerialNumber { get; set; }

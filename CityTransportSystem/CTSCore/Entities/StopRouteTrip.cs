@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CTSCore.Entities
 {
-    class StopRouteTrip
+    public class StopRouteTrip
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }

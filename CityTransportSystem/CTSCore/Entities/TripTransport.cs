@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CTSCore.Entities
 {
-    class TripTransport
+    public class TripTransport
     {
         public int Id { get; set; }
 
