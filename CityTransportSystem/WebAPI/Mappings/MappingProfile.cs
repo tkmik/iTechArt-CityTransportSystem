@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CTSWebAPI.Mappings
 {
-    public class MapingProfile : Profile
+    public class MappingProfile : Profile
     {
-        public MapingProfile()
+        public MappingProfile()
         {
 
         }
