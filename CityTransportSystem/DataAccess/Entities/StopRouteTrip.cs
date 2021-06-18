@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CTSCore.Entities
+namespace DataAccess.Entities
 {
     public class StopRouteTrip
     {
@@ -14,7 +12,7 @@ namespace CTSCore.Entities
 
         public int StopRouteId { get; set; }
         public StopRoute StopRoutes { get; set; }
-        
+
 
     }
 }

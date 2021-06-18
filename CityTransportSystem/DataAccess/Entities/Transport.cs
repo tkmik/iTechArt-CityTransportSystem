@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace CTSCore.Entities
+namespace DataAccess.Entities
 {
     public class Transport
     {
