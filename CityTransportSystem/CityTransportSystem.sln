@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTSCore", "CTSCore\CTSCore.csproj", "{8D6E9C79-D2A1-4868-A1CE-4D628CC81215}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{8D6E9C79-D2A1-4868-A1CE-4D628CC81215}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTSWebAPI", "CTSWebAPI\CTSWebAPI.csproj", "{93365172-E11D-48BD-AB4A-F5D35C742A6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{93365172-E11D-48BD-AB4A-F5D35C742A6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

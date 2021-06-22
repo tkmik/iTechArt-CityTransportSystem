@@ -4,9 +4,11 @@ using CTSWebAPI.Mappings;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace CTSWebAPI
 {
@@ -19,11 +21,14 @@ namespace CTSWebAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>()
-                    .AddAutoMapper(map => map.AddProfile<MapingProfile>(), typeof(Startup))
+            services.AddDbContext<AppDbContext>(options => 
+                    {                   
+                        string connectionString = Configuration.GetConnectionString("PostgreSQL");
+                        options.UseNpgsql(connectionString);
+                    })
+                    .AddAutoMapper(map => map.AddProfile<MappingProfile>(), typeof(Startup))
                     .AddControllers()
                     .AddFluentValidation()
                     .AddNewtonsoftJson(options =>
@@ -32,13 +37,11 @@ namespace CTSWebAPI
                     });
         }
 
-        //This method gets called by the runtime. Use this method to add services instead ConfigureServices
         public void ContainerBuilder(ContainerBuilder builder)
         {
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
