@@ -21,12 +21,12 @@ namespace DataAccess.Repositories
             return _dbContext.TransportType.Find(id);
         }
 
-        public IEnumerable<TransportType> GetList()
+        public IEnumerable<TransportType> GetAll()
         {
             return _dbContext.TransportType;
         }
 
-        public void Create(TransportType item)
+        public void Add(TransportType item)
         {
             _dbContext.TransportType.Add(item);
         }
@@ -43,37 +43,6 @@ namespace DataAccess.Repositories
             {
                 _dbContext.Remove(transportType);
             }
-        }
-
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                _dbContext.Dispose();
-            }
-
-            disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~TransportTypeRepository()
-        {
-            Dispose(false);
         }
     }
 }

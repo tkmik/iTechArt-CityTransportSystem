@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult GetTransports()
         {
-            return new JsonResult(_transportRepository.GetList());
+            return new JsonResult(_transportRepository.GetAll());
         }
     }
 }

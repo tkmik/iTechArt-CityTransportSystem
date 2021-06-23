@@ -21,12 +21,12 @@ namespace DataAccess.Repositories
             return _dbContext.Route.Find(id);
         }
 
-        public IEnumerable<Route> GetList()
+        public IEnumerable<Route> GetAll()
         {
             return _dbContext.Route;
         }
 
-        public void Create(Route item)
+        public void Add(Route item)
         {
             _dbContext.Route.Add(item);
         }
@@ -43,37 +43,6 @@ namespace DataAccess.Repositories
             {
                 _dbContext.Route.Remove(route);
             }
-        }
-
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                _dbContext.Dispose();
-            }
-
-            disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~RouteRepository()
-        {
-            Dispose(false);
         }
     }
 }

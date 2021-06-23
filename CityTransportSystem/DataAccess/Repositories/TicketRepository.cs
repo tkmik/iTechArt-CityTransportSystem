@@ -21,11 +21,11 @@ namespace DataAccess.Repositories
             return _dbContext.Ticket.Find(id);
         }
 
-        public IEnumerable<Ticket> GetList()
+        public IEnumerable<Ticket> GetAll()
         {
             return _dbContext.Ticket;
         }
-        public void Create(Ticket item)
+        public void Add(Ticket item)
         {
             _dbContext.Ticket.Add(item);
         }
@@ -42,37 +42,6 @@ namespace DataAccess.Repositories
             {
                 _dbContext.Remove(ticket);
             }
-        }
-
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                _dbContext.Dispose();
-            }
-
-            disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~TicketRepository()
-        {
-            Dispose(true);
         }
     }
 }

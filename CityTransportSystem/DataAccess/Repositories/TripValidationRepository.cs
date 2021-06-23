@@ -21,11 +21,11 @@ namespace DataAccess.Repositories
             return _dbContext.TripValidation.Find(id);
         }
 
-        public IEnumerable<TripValidation> GetList()
+        public IEnumerable<TripValidation> GetAll()
         {
             return _dbContext.TripValidation;
         }
-        public void Create(TripValidation item)
+        public void Add(TripValidation item)
         {
             _dbContext.TripValidation.Add(item);
         }
@@ -41,36 +41,6 @@ namespace DataAccess.Repositories
             {
                 _dbContext.Remove(tripValidation);
             }
-        }
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                _dbContext.Dispose();
-            }
-
-            disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~TripVAlidationRepository()
-        {
-            Dispose(false);
         }
     }
 }

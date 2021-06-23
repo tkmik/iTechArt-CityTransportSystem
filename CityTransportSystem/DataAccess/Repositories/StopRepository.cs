@@ -21,12 +21,12 @@ namespace DataAccess.Repositories
             return _dbContext.Stop.Find(id);
         }
 
-        public IEnumerable<Stop> GetList()
+        public IEnumerable<Stop> GetAll()
         {
             return _dbContext.Stop;
         }
 
-        public void Create(Stop item)
+        public void Add(Stop item)
         {
             _dbContext.Stop.Add(item);
         }
@@ -43,37 +43,6 @@ namespace DataAccess.Repositories
             {
                 _dbContext.Stop.Remove(stop);
             }
-        }
-
-        public void Save()
-        {
-            _dbContext.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                _dbContext.Dispose();
-            }
-
-            disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~StopRepository()
-        {
-            Dispose(false);
         }
     }
 }
