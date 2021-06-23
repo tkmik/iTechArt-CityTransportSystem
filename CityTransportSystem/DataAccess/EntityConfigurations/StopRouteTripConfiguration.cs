@@ -1,11 +1,8 @@
-﻿using CTSCore.Entities;
+﻿using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace CTSCore.EntityConfigurations
+namespace DataAccess.EntityConfigurations
 {
     class StopRouteTripConfiguration : IEntityTypeConfiguration<StopRouteTrip>
     {
