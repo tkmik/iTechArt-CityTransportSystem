@@ -3,6 +3,7 @@ using DataAccess.EF;
 using DataAccess.Entities;
 using DataAccess.Interfaces;
 using DataAccess.Repositories;
+using DataAccess.UnitOfWork;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,7 +42,7 @@ namespace WebAPI
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            builder.RegisterType<TransportRepository>().As<IRepository<Transport>>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
