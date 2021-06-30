@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DataAccess.Entities;
-using DataAccess.Interfaces;
 using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace WebAPI.Controllers
 {
@@ -20,9 +20,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetTransports()
+        public IEnumerable<Transport> GetTransports()
         {
-            return new JsonResult(_unitOfWork.TransportRepository.GetAll());
+            return _unitOfWork.TransportRepository.GetAll();
         }
     }
 }
