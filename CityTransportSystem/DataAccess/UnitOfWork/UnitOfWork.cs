@@ -13,28 +13,37 @@ namespace DataAccess.UnitOfWork
     {
         private readonly AppDbContext _context;
 
-        public UnitOfWork(AppDbContext context)
+        public UnitOfWork(
+            AppDbContext context,
+            IRouteRepository routeRepository,
+            IStopRepository stopRepository,
+            ITicketRepository ticketRepository,
+            ITransportRepository transportRepository,
+            ITransportTypeRepository transportTypeRepository,
+            ITripRepository tripRepository,
+            ITripValidationRepository tripValidationRepository
+            )
         {
             _context = context;
-            RouteRepository = new RouteRepository(_context);
-            StopRepository = new StopRepository(_context);
-            TicketRepository = new TicketRepository(_context);
-            TransportRepository = new TransportRepository(_context);
-            TransportTypeRepository = new TransportTypeRepository(_context);
-            TripRepository = new TripRepository(_context);
-            TripValidationRepository = new TripValidationRepository(_context);
+            RouteRepository = routeRepository;
+            StopRepository = stopRepository;
+            TicketRepository = ticketRepository;
+            TransportRepository = transportRepository;
+            TransportTypeRepository = transportTypeRepository;
+            TripRepository = tripRepository;
+            TripValidationRepository = tripValidationRepository;
         }
 
-        public IRouteRepository RouteRepository { get; }
-        public IStopRepository StopRepository { get; }
-        public ITicketRepository TicketRepository { get; }
-        public ITransportRepository TransportRepository { get; }
-        public ITransportTypeRepository TransportTypeRepository { get; }
-        public ITripRepository TripRepository { get; }
-        public ITripValidationRepository TripValidationRepository { get; }
+        public IRouteRepository RouteRepository { get; set; }
+        public IStopRepository StopRepository { get; set; }
+        public ITicketRepository TicketRepository { get; set; }
+        public ITransportRepository TransportRepository { get; set; }
+        public ITransportTypeRepository TransportTypeRepository { get; set; }
+        public ITripRepository TripRepository { get; set; }
+        public ITripValidationRepository TripValidationRepository { get; set; }
 
         public void Save()
-        {
+        {            
             _context.SaveChanges();
         }
     }

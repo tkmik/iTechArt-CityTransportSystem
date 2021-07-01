@@ -9,13 +9,13 @@ namespace DataAccess.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        IRouteRepository RouteRepository { get; }
-        IStopRepository StopRepository { get; }
-        ITicketRepository TicketRepository { get; }
-        ITransportRepository TransportRepository { get; }
-        ITransportTypeRepository TransportTypeRepository { get; }
-        ITripRepository TripRepository { get; }
-        ITripValidationRepository TripValidationRepository { get; }
+        IRouteRepository RouteRepository { get; set; }
+        IStopRepository StopRepository { get; set; }
+        ITicketRepository TicketRepository { get; set; }
+        ITransportRepository TransportRepository { get; set; }
+        ITransportTypeRepository TransportTypeRepository { get; set; }
+        ITripRepository TripRepository { get; set; }
+        ITripValidationRepository TripValidationRepository { get; set; }
         void Save();
     }
 }
