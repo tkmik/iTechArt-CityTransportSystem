@@ -1,6 +1,7 @@
 ﻿using DataAccess.EF;
 using DataAccess.Entities;
 using DataAccess.GenericRepository;
+using DataAccess.Interfaces;
 using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,22 @@ namespace DataAccess.UnitOfWork
         public UnitOfWork(AppDbContext context)
         {
             _context = context;
+            RouteRepository = new RouteRepository(_context);
+            StopRepository = new StopRepository(_context);
+            TicketRepository = new TicketRepository(_context);
+            TransportRepository = new TransportRepository(_context);
+            TransportTypeRepository = new TransportTypeRepository(_context);
+            TripRepository = new TripRepository(_context);
+            TripValidationRepository = new TripValidationRepository(_context);
         }
 
-        public IGenericRepository<Route> RouteRepository => new RouteRepository(_context);
-
-        public IGenericRepository<Stop> StopRepository => new StopRepository(_context);
-
-        public IGenericRepository<Ticket> TicketRepository => new TicketRepository(_context);
-
-        public IGenericRepository<Transport> TransportRepository => new TransportRepository(_context);
-
-        public IGenericRepository<TransportType> TransportTypeRepository => new TransportTypeRepository(_context);
-
-        public IGenericRepository<Trip> TripRepository => new TripRepository(_context);
-
-        public IGenericRepository<TripValidation> TripValidationRepository => new TripValidationRepository(_context);
+        public IRouteRepository RouteRepository { get; }
+        public IStopRepository StopRepository { get; }
+        public ITicketRepository TicketRepository { get; }
+        public ITransportRepository TransportRepository { get; }
+        public ITransportTypeRepository TransportTypeRepository { get; }
+        public ITripRepository TripRepository { get; }
+        public ITripValidationRepository TripValidationRepository { get; }
 
         public void Save()
         {

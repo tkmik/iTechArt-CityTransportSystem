@@ -16,7 +16,7 @@ namespace DataAccess.GenericRepository
             _dbContext = context;
         }
 
-        protected virtual DbSet<TEntity> Table
+        protected virtual DbSet<TEntity> DbSet
         {
             get
             {
@@ -30,28 +30,28 @@ namespace DataAccess.GenericRepository
 
         public virtual TEntity Get(object id)
         {
-            return Table.Find(id);
+            return DbSet.Find(id);
         }
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return Table.ToList();
+            return DbSet.ToList();
         }
 
         public virtual void Add(TEntity entity)
         {
-            Table.Add(entity);
+            DbSet.Add(entity);
         }
 
         public virtual void Update(TEntity entity)
         {
-            Table.Attach(entity);
+            DbSet.Attach(entity);
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(object id)
         {
-            TEntity entity = Table.Find(id);
+            TEntity entity = DbSet.Find(id);
             Delete(entity);
         }
 
@@ -59,9 +59,9 @@ namespace DataAccess.GenericRepository
         {
             if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
             {
-                Table.Attach(entityToDelete);
+                DbSet.Attach(entityToDelete);
             }
-            Table.Remove(entityToDelete);
+            DbSet.Remove(entityToDelete);
         }
     }
 }

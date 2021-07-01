@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entities;
 using DataAccess.GenericRepository;
+using DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,13 +9,13 @@ namespace DataAccess.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        IGenericRepository<Route> RouteRepository { get; }
-        IGenericRepository<Stop> StopRepository { get; }
-        IGenericRepository<Ticket> TicketRepository { get; }
-        IGenericRepository<Transport> TransportRepository { get; }
-        IGenericRepository<TransportType> TransportTypeRepository { get; }
-        IGenericRepository<Trip> TripRepository { get; }
-        IGenericRepository<TripValidation> TripValidationRepository { get; }
+        IRouteRepository RouteRepository { get; }
+        IStopRepository StopRepository { get; }
+        ITicketRepository TicketRepository { get; }
+        ITransportRepository TransportRepository { get; }
+        ITransportTypeRepository TransportTypeRepository { get; }
+        ITripRepository TripRepository { get; }
+        ITripValidationRepository TripValidationRepository { get; }
         void Save();
     }
 }
