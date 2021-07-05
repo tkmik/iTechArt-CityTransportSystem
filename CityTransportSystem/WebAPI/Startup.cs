@@ -1,6 +1,9 @@
 using Autofac;
-using CTSCore.EF;
-using CTSWebAPI.Mappings;
+using DataAccess.EF;
+using DataAccess.Entities;
+using DataAccess.Interfaces;
+using DataAccess.Repositories;
+using DataAccess.UnitOfWork;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,9 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
+using System;
+using System.Reflection;
+using WebAPI.Mappings;
 
-namespace CTSWebAPI
+namespace WebAPI
 {
     public class Startup
     {
@@ -23,8 +28,8 @@ namespace CTSWebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => 
-                    {                   
+            services.AddDbContext<AppDbContext>(options =>
+                    {
                         string connectionString = Configuration.GetConnectionString("PostgreSQL");
                         options.UseNpgsql(connectionString);
                     })
@@ -37,9 +42,12 @@ namespace CTSWebAPI
                     });
         }
 
-        public void ContainerBuilder(ContainerBuilder builder)
+        public void ConfigureContainer(ContainerBuilder builder)
         {
-
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+                .Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

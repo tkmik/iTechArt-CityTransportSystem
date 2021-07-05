@@ -1,28 +1,28 @@
 ﻿using AutoMapper;
-using CTSCore.EF;
+using DataAccess.Entities;
+using DataAccess.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
-namespace CTSWebAPI.Controllers
+namespace WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class TransportController : ControllerBase
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public TransportController(AppDbContext appDbContext, IMapper mapper)
+        public TransportController(IUnitOfWork unit, IMapper mapper)
         {
-            _appDbContext = appDbContext;
+            _unitOfWork = unit;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTransports()
+        public IEnumerable<Transport> GetTransports()
         {
-            return new JsonResult(await _appDbContext.Transport.ToListAsync());
+            return _unitOfWork.TransportRepository.GetAll();
         }
     }
 }
