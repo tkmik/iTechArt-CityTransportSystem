@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace CTSCore.Entities
+namespace DataAccess.Entities
 {
     public class TransportType
     {
         public int Id { get; set; }
         public string TransportTypeName { get; set; }
 
-        public ICollection<Transport> Transports { get; set; }
-        public ICollection<TransportTypeStop> TransportTypeStops { get; set; }
+        public virtual ICollection<Transport> Transports { get; set; }
+        public virtual ICollection<TransportTypeStop> TransportTypeStops { get; set; }
     }
 }

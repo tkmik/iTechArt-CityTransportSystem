@@ -1,11 +1,8 @@
-﻿using CTSCore.Entities;
-using CTSCore.EntityConfigurations;
+﻿using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 using System.Reflection;
 
-namespace CTSCore.EF
+namespace DataAccess.EF
 {
     public class AppDbContext : DbContext
     {
@@ -21,14 +18,13 @@ namespace CTSCore.EF
         public DbSet<TripTransport> TripTransport { get; set; }
         public DbSet<TripValidation> TripValidation { get; set; }
 
-
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
-        {   }
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());       
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

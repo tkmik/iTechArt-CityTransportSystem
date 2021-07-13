@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace CTSCore.Entities
+namespace DataAccess.Entities
 {
     public class Transport
     {
@@ -16,9 +15,9 @@ namespace CTSCore.Entities
         public byte StatusDecommissioned { get; set; }
 
         public int TransportTypeId { get; set; }
-        public TransportType TransportType { get; set; }
+        public virtual TransportType TransportType { get; set; }
 
-        public ICollection<TripTransport> TripTransports { get; set; }
-        public ICollection<TripValidation> TripValidations { get; set; }
+        public virtual ICollection<TripTransport> TripTransports { get; set; }
+        public virtual ICollection<TripValidation> TripValidations { get; set; }
     }
 }

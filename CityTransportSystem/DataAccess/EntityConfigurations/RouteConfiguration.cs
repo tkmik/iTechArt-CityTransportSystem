@@ -1,8 +1,8 @@
-﻿using CTSCore.Entities;
+﻿using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CTSCore.EntityConfigurations
+namespace DataAccess.EntityConfigurations
 {
     class RouteConfiguration : IEntityTypeConfiguration<Route>
     {

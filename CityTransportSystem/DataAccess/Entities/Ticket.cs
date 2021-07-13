@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CTSCore.Entities
+﻿namespace DataAccess.Entities
 {
     public class Ticket
     {
@@ -11,6 +7,6 @@ namespace CTSCore.Entities
         public float Cost { get; set; }
 
         public int TripValidationId { get; set; }
-        public TripValidation TripValidation { get; set; }
+        public virtual TripValidation TripValidation { get; set; }
     }
 }

@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace CTSCore.Entities
+namespace DataAccess.Entities
 {
     public class StopRoute
     {
         public int Id { get; set; }
 
         public int StopId { get; set; }
-        public Stop Stop { get; set; }
+        public virtual Stop Stop { get; set; }
 
         public int RouteId { get; set; }
-        public Route Route { get; set; }
+        public virtual Route Route { get; set; }
 
-        public ICollection<StopRouteTrip> StopRouteTrips { get; set; }
+        public virtual ICollection<StopRouteTrip> StopRouteTrips { get; set; }
     }
 }

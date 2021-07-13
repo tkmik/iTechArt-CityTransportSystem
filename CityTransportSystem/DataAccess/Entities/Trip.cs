@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace CTSCore.Entities
+namespace DataAccess.Entities
 {
     public class Trip
     {
@@ -10,9 +8,9 @@ namespace CTSCore.Entities
         public string TripName { get; set; }
 
         public int RouteId { get; set; }
-        public Route Route { get; set; }
+        public virtual Route Route { get; set; }
 
-        public ICollection<StopRouteTrip> StopRouteTrips { get; set; }
-        public ICollection<TripTransport> TripTransports { get; set; }
+        public virtual ICollection<StopRouteTrip> StopRouteTrips { get; set; }
+        public virtual ICollection<TripTransport> TripTransports { get; set; }
     }
 }
