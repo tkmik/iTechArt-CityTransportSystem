@@ -15,9 +15,9 @@ namespace DataAccess.Entities
         public byte StatusDecommissioned { get; set; }
 
         public int TransportTypeId { get; set; }
-        public TransportType TransportType { get; set; }
+        public virtual TransportType TransportType { get; set; }
 
-        public ICollection<TripTransport> TripTransports { get; set; }
-        public ICollection<TripValidation> TripValidations { get; set; }
+        public virtual ICollection<TripTransport> TripTransports { get; set; }
+        public virtual ICollection<TripValidation> TripValidations { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using DataAccess.EF;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace DataAccess.GenericRepository
 {
@@ -28,34 +28,42 @@ namespace DataAccess.GenericRepository
             }
         }
 
-        public virtual TEntity Get(object id)
+        public virtual async Task<TEntity> GetAsync(object id)
         {
-            return DbSet.Find(id);
+            return await DbSet.FindAsync(id);
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return DbSet.ToList();
+            return await DbSet.ToListAsync();
         }
 
-        public virtual void Add(TEntity entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
-            DbSet.Add(entity);
+            await DbSet.AddAsync(entity);
         }
 
-        public virtual void Update(TEntity entity)
+        public virtual async Task UpdateAsync(TEntity entity)
         {
-            DbSet.Attach(entity);
+            TEntity item = await DbSet.FindAsync(entity);
+            UpdateEntity(item);
+        }
+        protected virtual void UpdateEntity(TEntity entityToUpdate)
+        {
+            if (_dbContext.Entry(entityToUpdate).State == EntityState.Detached)
+            {
+                DbSet.Attach(entityToUpdate);
+            }
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
-        public virtual void Delete(object id)
+        public virtual async Task DeleteAsync(object id)
         {
-            TEntity entity = DbSet.Find(id);
-            Delete(entity);
+            TEntity item = await DbSet.FindAsync(id);
+            DeleteEntity(item);
         }
 
-        public virtual void Delete(TEntity entityToDelete)
+        protected virtual void DeleteEntity(TEntity entityToDelete)
         {
             if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
             {

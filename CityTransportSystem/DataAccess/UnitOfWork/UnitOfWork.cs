@@ -1,11 +1,6 @@
 ﻿using DataAccess.EF;
-using DataAccess.Entities;
-using DataAccess.GenericRepository;
 using DataAccess.Interfaces;
-using DataAccess.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess.UnitOfWork
 {
@@ -42,9 +37,9 @@ namespace DataAccess.UnitOfWork
         public ITripRepository TripRepository { get; set; }
         public ITripValidationRepository TripValidationRepository { get; set; }
 
-        public void Save()
-        {            
-            _context.SaveChanges();
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

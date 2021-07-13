@@ -7,6 +7,6 @@
         public float Cost { get; set; }
 
         public int TripValidationId { get; set; }
-        public TripValidation TripValidation { get; set; }
+        public virtual TripValidation TripValidation { get; set; }
     }
 }

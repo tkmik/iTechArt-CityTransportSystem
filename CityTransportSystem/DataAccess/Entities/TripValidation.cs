@@ -9,9 +9,9 @@ namespace DataAccess.Entities
         public DateTime ValidationTime { get; set; }
 
         public int TransportId { get; set; }
-        public Transport Transport { get; set; }
+        public virtual Transport Transport { get; set; }
 
-        public ICollection<Ticket> Tickets { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
 
     }
 }

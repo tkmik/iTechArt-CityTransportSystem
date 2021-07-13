@@ -8,7 +8,7 @@ namespace DataAccess.Entities
         public string RouteName { get; set; }
         public string Season { get; set; }
 
-        public ICollection<Trip> Trips { get; set; }
-        public ICollection<StopRoute> StopRoutes { get; set; }
+        public virtual ICollection<Trip> Trips { get; set; }
+        public virtual ICollection<StopRoute> StopRoutes { get; set; }
     }
 }

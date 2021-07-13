@@ -1,9 +1,5 @@
-﻿using DataAccess.Entities;
-using DataAccess.GenericRepository;
-using DataAccess.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DataAccess.Interfaces;
+using System.Threading.Tasks;
 
 namespace DataAccess.UnitOfWork
 {
@@ -16,6 +12,6 @@ namespace DataAccess.UnitOfWork
         ITransportTypeRepository TransportTypeRepository { get; set; }
         ITripRepository TripRepository { get; set; }
         ITripValidationRepository TripValidationRepository { get; set; }
-        void Save();
+        Task SaveAsync();
     }
 }

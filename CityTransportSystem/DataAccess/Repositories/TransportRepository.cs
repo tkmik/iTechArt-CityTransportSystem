@@ -8,6 +8,6 @@ namespace DataAccess.Repositories
     public class TransportRepository : GenericRepository<Transport>, ITransportRepository
     {
         public TransportRepository(AppDbContext context) : base(context)
-        {   }
+        { }
     }
 }

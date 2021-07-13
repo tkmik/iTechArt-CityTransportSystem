@@ -9,7 +9,7 @@ namespace DataAccess.Entities
         public string Coordinate { get; set; }
         public string Address { get; set; }
 
-        public ICollection<StopRoute> StopRoutes { get; set; }
-        public ICollection<TransportTypeStop> TransportTypeStops { get; set; }
+        public virtual ICollection<StopRoute> StopRoutes { get; set; }
+        public virtual ICollection<TransportTypeStop> TransportTypeStops { get; set; }
     }
 }

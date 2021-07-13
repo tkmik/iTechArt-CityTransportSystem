@@ -8,10 +8,10 @@ namespace DataAccess.Entities
         public DateTime Time { get; set; }
 
         public int TripId { get; set; }
-        public Trip Trip { get; set; }
+        public virtual Trip Trip { get; set; }
 
         public int StopRouteId { get; set; }
-        public StopRoute StopRoutes { get; set; }
+        public virtual StopRoute StopRoutes { get; set; }
 
 
     }

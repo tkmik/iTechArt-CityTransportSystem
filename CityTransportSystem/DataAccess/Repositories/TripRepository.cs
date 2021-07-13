@@ -8,6 +8,6 @@ namespace DataAccess.Repositories
     public class TripRepository : GenericRepository<Trip>, ITripRepository
     {
         public TripRepository(AppDbContext context) : base(context)
-        {   }
+        { }
     }
 }

@@ -8,6 +8,6 @@ namespace DataAccess.Repositories
     public class StopRepository : GenericRepository<Stop>, IStopRepository
     {
         public StopRepository(AppDbContext context) : base(context)
-        {   }
+        { }
     }
 }

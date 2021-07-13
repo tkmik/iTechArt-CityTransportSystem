@@ -17,10 +17,10 @@ namespace DataAccess.EF
         public DbSet<Trip> Trip { get; set; }
         public DbSet<TripTransport> TripTransport { get; set; }
         public DbSet<TripValidation> TripValidation { get; set; }
-        
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
-        {   }
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
